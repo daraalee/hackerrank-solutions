@@ -65,35 +65,31 @@ function timeInWords(h: number, m: number): string {
         'twenty seven',
         'twenty eight',
         'twenty nine',
-        'half',
-        'tirty one',
-        'tirty two',
-        'tirty three',
-        'tirty four',
-        'tirty five',
-        'tirty six',
-        'tirty seven',
-        'tirty eight',
-        'tirty nine',
+        'half'
     ]
 
-    if(m === 0){
-        time = `${words[h -1]} o' clock`;
-    }
-    else if(m === 1){
-        time = `${words[m -1]} minute past ${words[h -1]}`;
-    }
-    else if(m === 30 || m === 15){
-         time = `${words[m -1]} past ${words[h -1]}`;
-    }
-    else if(m < 30){
-        time = `${words[m -1]} minutes past ${words[h -1]}`;
-    }
-    else if(m==45){
-        time = `${words[60 - m -1]} to ${words[h]}`
-    }
-    else{
-        time = `${words[60 - m -1]} minutes to ${words[h]}`
+    switch(m){
+        case 0:
+            time = `${words[h -1]} o' clock`;
+            break;
+        case 1:
+            time = `${words[m -1]} minute past ${words[h -1]}`;
+            break;
+        case 30:
+        case 15:
+            time = `${words[m -1]} past ${words[h -1]}`;
+            break;
+        case 45:
+            time = `${words[60 - m -1]} to ${words[h]}`
+            break;
+        default:
+            if(m<30){
+                time = `${words[m -1]} minutes past ${words[h -1]}`;
+            }
+            else{
+                time = `${words[60 - m -1]} minutes to ${words[h]}`
+            }
+            break;
     }
         
     return time;
